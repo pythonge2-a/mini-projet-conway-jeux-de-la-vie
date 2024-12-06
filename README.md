@@ -13,9 +13,10 @@ Description du projet en quelques lignes
 
 ## Cahier des charges
 
-- Un jeux de la vie fonctionnel
-- Ceci **doit** être fait
-- Ceci **devrait** être fait (si le temps le permet)
+- Un jeux de la vie fonctionnel avec la règle B3S23 
+- Possibilité d'ajouter des cellules vivantes durant le jeu
+- Ajout de tests pour notre code
+- **Si possible** changer les règles avant le lancement du jeu
 
 ## Installation
 
@@ -32,6 +33,6 @@ poetry install
 2. Créer un fichier `__init__.py` vide
 3. Créer un fichier `__main__.py` vide
 4. Mettre à jour le fichier `README.md`
-5. Créer un projet Poetry avec `poetry new`
+5. Créer un projet Poetry avec `poetry init`
 6. Ajouter les fichiers à Git
 7. Commit et push
