@@ -1,2 +1,0 @@
-print("Bonjour l'équipe")
-

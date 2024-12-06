@@ -3,10 +3,9 @@
 
 ## Membres
 
-- Nom 1
-- Nom 2
-- Nom 3
-- ...
+- Rémi Richard
+- Romain Schorro
+- Jonas Perez
 
 ## Description
 
@@ -14,10 +13,9 @@ Description du projet en quelques lignes
 
 ## Cahier des charges
 
-- Ceci **doit** être fait
+- Un jeux de la vie fonctionnel
 - Ceci **doit** être fait
 - Ceci **devrait** être fait (si le temps le permet)
-- ...
 
 ## Installation
 
