@@ -1,4 +1,10 @@
 
 class Conway:
     def __init__(self, conway=None):
-        self.conway = 0
+        self.conway = []
+        
+    def __iter__(self):
+        self.index = 0
+        return iter(self.conway)
+
+
