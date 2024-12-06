@@ -1,10 +1,18 @@
 import pygame
 import time
 import numpy as np
+import click
 from game_of_life import GameOfLife
 from graphics import GameDisplay, COLOR_BG
 
-def main():
+@click.command()
+@click.option("-f", "--frequency", default=100, type=float, help="fréquence de rafraîchissement du jeu en Hz")
+
+
+def main(frequency):
+    if frequency <= 0:
+        raise ValueError("La fréquence doit être superieur à 0.")
+    
     pygame.init()
 
     # Configurations
@@ -29,8 +37,11 @@ def main():
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_SPACE:
                     running = not running
+                elif event.key == pygame.K_n:
+                    game.reset()
+                    running = False
 
-            if pygame.mouse.get_pressed()[0]:  # Left click to toggle cells
+            if pygame.mouse.get_pressed()[0]:
                 pos = pygame.mouse.get_pos()
                 game.toggle_cell(pos[1] // cell_size, pos[0] // cell_size)
 
@@ -44,7 +55,7 @@ def main():
         display.refresh()
 
         if running:
-            time.sleep(0.001)
+            time.sleep(1/frequency)
 
 if __name__ == '__main__':
     main()

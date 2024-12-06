@@ -1,9 +1,9 @@
 import pygame
 
-COLOR_BG = (10, 10, 10)
-COLOR_GRID = (40, 40, 40)
-COLOR_DNI = (170, 170, 170)
-COLOR_ANI = (255, 255, 255)
+COLOR_BG = (10, 10, 10) # Background color
+COLOR_GRID = (40, 40, 40) # Grid color
+COLOR_DNI = (170, 170, 170) # Dead next iteration color
+COLOR_ANI = (255, 255, 255) # Alive next iteration color
 
 class GameDisplay:
     def __init__(self, width, height, cell_size):

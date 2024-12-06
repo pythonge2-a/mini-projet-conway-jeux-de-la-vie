@@ -30,3 +30,6 @@ class GameOfLife:
 
     def toggle_cell(self, row, col):
         self.grid[row, col] = 1 if self.grid[row, col] == 0 else 0
+
+    def reset(self):
+        self.grid = np.zeros((self.rows, self.cols))
