@@ -1,5 +1,5 @@
 [tool.poetry]
-name = "poetry-package"
+name = "conway"
 version = "0.1.0"
 description = ""
 authors = ["Jonas Perez <jonas.perez@hes-so.ch>"]

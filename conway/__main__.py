@@ -2,8 +2,8 @@ import pygame
 import time
 import numpy as np
 import click
-from game_of_life import GameOfLife
-from graphics import GameDisplay, COLOR_BG
+from .game_of_life import GameOfLife
+from .graphics import GameDisplay, COLOR_BG
 
 @click.command()
 @click.option("-f", "--frequency", default=100, type=float, help="fréquence de rafraîchissement du jeu en Hz")
