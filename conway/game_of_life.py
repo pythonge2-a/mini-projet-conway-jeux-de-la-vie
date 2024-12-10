@@ -6,22 +6,22 @@ class GameOfLife:
         self.cols = cols
         self.grid = np.zeros((rows, cols))
 
-    def update(self, with_progress=False):
+    def update(self, with_progress=False, born_min=3, born_max=3, survive_min=2, survive_max=3):
         updated_grid = np.zeros((self.rows, self.cols))
         for row in range(self.rows):
             for col in range(self.cols):
                 alive = np.sum(self.grid[row-1:row+2, col-1:col+2]) - self.grid[row, col]
 
                 if self.grid[row, col] == 1:
-                    if alive < 2 or alive > 3:
+                    if alive < survive_min or alive > survive_max:
                         if with_progress:
                             yield (row, col, 0)
-                    elif 2 <= alive <= 3:
+                    else:
                         updated_grid[row, col] = 1
                         if with_progress:
                             yield (row, col, 1)
                 else:
-                    if alive == 3:
+                    if alive >= born_min and alive <= born_max:
                         updated_grid[row, col] = 1
                         if with_progress:
                             yield (row, col, 1)

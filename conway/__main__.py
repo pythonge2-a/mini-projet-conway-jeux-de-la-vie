@@ -7,11 +7,20 @@ from graphics import GameDisplay, COLOR_BG
 
 @click.command()
 @click.option("-f", "--frequency", default=100, type=float, help="fréquence de rafraîchissement du jeu en Hz")
+@click.option("-b", "--born_min", default=3, type=int, help="Nombre minimum de voisins pour qu'une cellule naisse")
+@click.option("-d", "--born_max", default=3, type=int, help="Nombre maximum de voisins pour qu'une cellule naisse")
+@click.option("-s", "--survive_min", default=2, type=int, help="Nombre minimum de voisins pour qu'une cellule survive")
+@click.option("-m", "--survive_max", default=3, type=int, help="Nombre maximum de voisins pour qu'une cellule survive")
 
-
-def main(frequency):
+def main(frequency, born_min, born_max, survive_min, survive_max):
     if frequency <= 0:
         raise ValueError("La fréquence doit être superieur à 0.")
+    if born_min < 0 or born_max < 0 or survive_min < 0 or survive_max < 0:
+        raise ValueError("Les condition de naissance et de survie doivent être superieur ou égale à 0.")
+    if born_min > 8 or born_max > 8 or survive_min > 8 or survive_max > 8:
+        raise ValueError("Les condition de naissance et de survie doivent être inférieur ou égale à 8.")
+    if born_min > born_max or survive_min > survive_max:
+        raise ValueError("Les condition de naissance et de survie minimales doivent être inférieur ou égale aux condition maximales.")
     
     pygame.init()
 
@@ -46,7 +55,7 @@ def main(frequency):
                 game.toggle_cell(pos[1] // cell_size, pos[0] // cell_size)
 
         if running:
-            cells = list(game.update(with_progress=True))
+            cells = list(game.update(with_progress=True, born_min=born_min, born_max=born_max, survive_min=survive_min, survive_max=survive_max))
         else:
             cells = [(row, col, state) for (row, col), state in np.ndenumerate(game.grid)]
 
