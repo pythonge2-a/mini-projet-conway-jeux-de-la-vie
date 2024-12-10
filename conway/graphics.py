@@ -19,9 +19,12 @@ class GameDisplay:
         for col in range(0, self.width, self.cell_size):
             pygame.draw.line(self.screen, COLOR_GRID, (col, 0), (col, self.height))
 
-    def draw_cells(self, cells):
+    def draw_cells(self, cells, running=False):
         for row, col, state in cells:
-            color = COLOR_ANI if state == 1 else COLOR_DNI
+            if running is False:
+                color = COLOR_BG if state == 0 else COLOR_ANI
+            else:
+                color = COLOR_ANI if state == 1 else COLOR_DNI
             pygame.draw.rect(self.screen, color, (col * self.cell_size, row * self.cell_size, self.cell_size - 1, self.cell_size - 1))
 
     def refresh(self):

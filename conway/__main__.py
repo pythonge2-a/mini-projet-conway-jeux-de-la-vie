@@ -36,7 +36,6 @@ def main(frequency, born_min, born_max, survive_min, survive_max):
     running = False
     while True:
         display.screen.fill(COLOR_BG)
-        display.draw_grid()
 
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
@@ -60,7 +59,8 @@ def main(frequency, born_min, born_max, survive_min, survive_max):
             cells = [(row, col, state) for (row, col), state in np.ndenumerate(game.grid)]
 
 
-        display.draw_cells(cells)
+        display.draw_cells(cells, running)
+        display.draw_grid()
         display.refresh()
 
         if running:
