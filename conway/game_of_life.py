@@ -29,6 +29,10 @@ class GameOfLife:
         self.grid = updated_grid
 
     def toggle_cell(self, row, col):
+        if row < 0 or row >= self.rows:
+            row = 0 if row <= 0 else self.rows-1
+        if col < 0 or col >= self.cols:
+            col = 0 if col <= 0 else self.cols-1
         self.grid[row, col] = 1 if self.grid[row, col] == 0 else 0
 
     def reset(self):
