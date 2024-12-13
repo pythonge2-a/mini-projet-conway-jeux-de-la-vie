@@ -1,6 +1,5 @@
 ## command pour faire le test: 
-# cd tests
-# pytest test_main.py
+# Commande: pytest tests/tests_main.py
 
 import pytest
 from conway.game_of_life import GameOfLife
