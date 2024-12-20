@@ -1,5 +1,5 @@
-## command pour faire le test: 
-# Commande: pytest tests/GameOfLife.py
+## commande pour faire le test: 
+# Commande: pytest tests/tests_GameOfLife.py
 
 import pytest
 from conway.game_of_life import GameOfLife
