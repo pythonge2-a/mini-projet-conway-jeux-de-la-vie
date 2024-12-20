@@ -1,31 +1,16 @@
 import pygame
 import time
 import numpy as np
-import click
 from game_of_life import GameOfLife
 from graphics import GameDisplay, COLOR_BG
+from interface import Button, Slider
 
-@click.command()
-@click.option("-f", "--frequency", default=100, type=float, help="fréquence de rafraîchissement du jeu en Hz")
-@click.option("-b", "--born_min", default=3, type=int, help="Nombre minimum de voisins pour qu'une cellule naisse")
-@click.option("-d", "--born_max", default=3, type=int, help="Nombre maximum de voisins pour qu'une cellule naisse")
-@click.option("-s", "--survive_min", default=2, type=int, help="Nombre minimum de voisins pour qu'une cellule survive")
-@click.option("-m", "--survive_max", default=3, type=int, help="Nombre maximum de voisins pour qu'une cellule survive")
-
-def main(frequency, born_min, born_max, survive_min, survive_max):
-    if frequency <= 0:
-        raise ValueError("La fréquence doit être superieur à 0.")
-    if born_min < 0 or born_max < 0 or survive_min < 0 or survive_max < 0:
-        raise ValueError("Les condition de naissance et de survie doivent être superieur ou égale à 0.")
-    if born_min > 8 or born_max > 8 or survive_min > 8 or survive_max > 8:
-        raise ValueError("Les condition de naissance et de survie doivent être inférieur ou égale à 8.")
-    if born_min > born_max or survive_min > survive_max:
-        raise ValueError("Les condition de naissance et de survie minimales doivent être inférieur ou égale aux condition maximales.")
+def main():
     
     pygame.init()
 
     # Configurations
-    width, height = 800, 600
+    width, height = 1200, 800
     cell_size = 10
     rows, cols = height // cell_size, width // cell_size
 
@@ -33,14 +18,52 @@ def main(frequency, born_min, born_max, survive_min, survive_max):
     game = GameOfLife(rows, cols)
     display = GameDisplay(width, height, cell_size)
 
+    font = pygame.font.Font(None, 24)
+
+    reset_button = Button(
+        x=10, y=10, width=120, height=40,
+        text="Reset",
+        font=font,
+        color=(200, 50, 50),
+        text_color=(255, 255, 255),
+        action=game.reset
+    )
+    buttons = [reset_button]
+
+    # Créer les sliders
+    sliders = [
+        Slider(x=10, y=70, width=200, min_val=10, max_val=500, start_val=100, label="Frequency (Hz)", font=font),
+        Slider(x=10, y=130, width=200, min_val=0, max_val=8, start_val=3, label="Born Min", font=font),
+        Slider(x=10, y=170, width=200, min_val=0, max_val=8, start_val=3, label="Born Max", font=font),
+        Slider(x=10, y=210, width=200, min_val=0, max_val=8, start_val=2, label="Survive Min", font=font),
+        Slider(x=10, y=250, width=200, min_val=0, max_val=8, start_val=3, label="Survive Max", font=font)
+    ]
+
+    # Variables initiales
+    frequency = sliders[0].get_value()
+    born_min = sliders[1].get_value()
+    born_max = sliders[2].get_value()
+    survive_min = sliders[3].get_value()
+    survive_max = sliders[4].get_value()
+
     running = False
+    clock = pygame.time.Clock()
+
+    # Boucle principale
     while True:
+        time_delta = clock.tick(60) / 1000.0
         display.screen.fill(COLOR_BG)
 
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 pygame.quit()
                 return
+
+            for button in buttons:
+                button.handle_event(event)
+
+            for slider in sliders:
+                slider.handle_event(event)
 
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_SPACE:
@@ -53,15 +76,40 @@ def main(frequency, born_min, born_max, survive_min, survive_max):
                 pos = pygame.mouse.get_pos()
                 game.toggle_cell(pos[1] // cell_size, pos[0] // cell_size)
 
+        # sliders initial value
+        frequency = sliders[0].get_value()
+        born_min = sliders[1].get_value()
+        born_max = sliders[2].get_value()
+        survive_min = sliders[3].get_value()
+        survive_max = sliders[4].get_value()
+
+        if born_min > born_max:
+            born_min = born_max
+            sliders[1].value = born_min
+            sliders[1].handle_x = sliders[1].get_handle_pos()
+        if survive_min > survive_max:
+            survive_min = survive_max
+            sliders[3].value = survive_min
+            sliders[3].handle_x = sliders[3].get_handle_pos()
+
         if running:
             cells = list(game.update(with_progress=True, born_min=born_min, born_max=born_max, survive_min=survive_min, survive_max=survive_max))
         else:
             cells = [(row, col, state) for (row, col), state in np.ndenumerate(game.grid)]
 
-
         display.draw_cells(cells, running)
         display.draw_grid()
+
+        # Dessiner les boutons
+        for button in buttons:
+            button.draw(display.screen)
+
+        # Dessiner les sliders
+        for slider in sliders:
+            slider.draw(display.screen)
+
         display.refresh()
+
 
         if running:
             time.sleep(1/frequency)
