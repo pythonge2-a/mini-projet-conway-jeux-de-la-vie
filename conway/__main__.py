@@ -5,6 +5,12 @@ from game_of_life import GameOfLife
 from graphics import GameDisplay, COLOR_BG
 from interface import Button, Slider
 
+
+SPACESHIP1 = [
+    [0, 1, 0],
+    [0, 0, 1],
+    [1, 1, 1]
+]
 def main():
     
     pygame.init()
@@ -28,7 +34,16 @@ def main():
         text_color=(255, 255, 255),
         action=game.reset
     )
-    buttons = [reset_button]
+
+    spaceship1_button = Button(
+        x=140, y=10, width=160, height=40,
+        text="Spaceship_1",
+        font=font,
+        color=(50, 50, 200),
+        text_color=(255, 255, 255),
+        action=lambda: game.add_spaceship(SPACESHIP1)
+    )
+    buttons = [reset_button, spaceship1_button]
 
     # Créer les sliders
     sliders = [
@@ -47,11 +62,9 @@ def main():
     survive_max = sliders[4].get_value()
 
     running = False
-    clock = pygame.time.Clock()
 
     # Boucle principale
     while True:
-        time_delta = clock.tick(60) / 1000.0
         display.screen.fill(COLOR_BG)
 
         for event in pygame.event.get():
@@ -68,9 +81,6 @@ def main():
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_SPACE:
                     running = not running
-                elif event.key == pygame.K_n:
-                    game.reset()
-                    running = False
 
             if pygame.mouse.get_pressed()[0]:
                 pos = pygame.mouse.get_pos()

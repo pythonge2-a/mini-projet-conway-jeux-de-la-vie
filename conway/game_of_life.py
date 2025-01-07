@@ -35,5 +35,23 @@ class GameOfLife:
             col = 0 if col <= 0 else self.cols-1
         self.grid[row, col] = 1 if self.grid[row, col] == 0 else 0
 
+    def add_pattern(self, pattern, x_offset, y_offset):
+        pattern_rows = len(pattern)
+        pattern_cols = len(pattern[0])
+
+        for row in range(pattern_rows):
+            for col in range(pattern_cols):
+                x = x_offset + row
+                y = y_offset + col
+                if 0 <= x < self.rows and 0 <= y < self.cols:
+                    self.grid[x, y] = pattern[row][col]
+
+    def add_spaceship(self, spaceship):
+        self.reset()
+        
+        x_offset = self.rows // 2 - len(spaceship) // 2
+        y_offset = self.cols // 2 - len(spaceship[0]) // 2
+        self.add_pattern(spaceship, x_offset, y_offset)
+
     def reset(self):
         self.grid = np.zeros((self.rows, self.cols))
