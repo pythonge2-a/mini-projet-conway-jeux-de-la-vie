@@ -32,11 +32,11 @@ def main():
 
     # Créer les sliders
     sliders = [
-        Slider(x=10, y=70, width=200, min_val=10, max_val=500, start_val=100, label="Frequency (Hz)", font=font),
-        Slider(x=10, y=130, width=200, min_val=0, max_val=8, start_val=3, label="Born Min", font=font),
-        Slider(x=10, y=170, width=200, min_val=0, max_val=8, start_val=3, label="Born Max", font=font),
-        Slider(x=10, y=210, width=200, min_val=0, max_val=8, start_val=2, label="Survive Min", font=font),
-        Slider(x=10, y=250, width=200, min_val=0, max_val=8, start_val=3, label="Survive Max", font=font)
+        Slider(x=10, y=90, width=200, min_val=10, max_val=500, start_val=100, label="Frequency (Hz)", font=font),
+        Slider(x=10, y=140, width=200, min_val=0, max_val=8, start_val=3, label="Born Min", font=font),
+        Slider(x=10, y=190, width=200, min_val=0, max_val=8, start_val=3, label="Born Max", font=font),
+        Slider(x=10, y=240, width=200, min_val=0, max_val=8, start_val=2, label="Survive Min", font=font),
+        Slider(x=10, y=290, width=200, min_val=0, max_val=8, start_val=3, label="Survive Max", font=font)
     ]
 
     # Variables initiales
@@ -64,6 +64,7 @@ def main():
 
             for slider in sliders:
                 slider.handle_event(event)
+                slider.handle_grid_event(event, sliders)
 
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_SPACE:
@@ -74,7 +75,9 @@ def main():
 
             if pygame.mouse.get_pressed()[0]:
                 pos = pygame.mouse.get_pos()
-                game.toggle_cell(pos[1] // cell_size, pos[0] // cell_size)
+                for slider in sliders:
+                    if not slider.contains_point(pos):  # Proceed with grid interaction only if not over slider
+                        game.toggle_cell(pos[1] // cell_size, pos[0] // cell_size)
 
         # sliders initial value
         frequency = sliders[0].get_value()

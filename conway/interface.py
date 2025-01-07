@@ -80,3 +80,23 @@ class Slider:
 
     def get_value(self):
         return self.value
+
+    def contains_point(self, pos):
+        return self.rect.collidepoint(pos)
+
+    GRID_MASK = pygame.Rect(0, 0, 800, 400)
+
+    def handle_grid_event(self, event, sliders):
+
+        if event.type in [pygame.MOUSEBUTTONDOWN, pygame.MOUSEMOTION]:
+            for slider in sliders:
+                if slider.contains_point(event.pos):  # Ignore if the event is on a slider
+                    return
+                
+        if event.type == pygame.MOUSEBUTTONDOWN:
+            if self.GRID_MASK.collidepoint(event.pos):  # Check if the event is within the mask
+                print(f"Grid clicked at {event.pos}")
+        elif event.type == pygame.MOUSEMOTION:
+            if pygame.mouse.get_pressed()[0]:  # Left mouse button is held down
+                if self.GRID_MASK.collidepoint(event.pos):  # Continuous check within the mask
+                    print(f"Mouse dragged over grid at {event.pos}")
