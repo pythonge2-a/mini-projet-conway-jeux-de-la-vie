@@ -56,6 +56,13 @@ def main():
         Slider(x=10, y=290, width=200, min_val=0, max_val=8, start_val=3, label="Survive Max", font=font)
     ]
 
+    # Fond en couleur des sliders + boutons
+    bg_zone_x = 0
+    bg_zone_y = 0
+    bg_zone_width = 200
+    bg_zone_height = 800
+    bg_zone_color = (255, 255, 255, 0.25)
+
     # Variables initiales
     frequency = sliders[0].get_value()
     born_min = sliders[1].get_value()
@@ -125,6 +132,8 @@ def main():
 
         display.draw_cells(cells, running)
         display.draw_grid()
+        pygame.draw.rect(display.screen, bg_zone_color, (bg_zone_x, bg_zone_y, bg_zone_width, bg_zone_height))
+
 
         # Dessiner les boutons
         for button in buttons:
