@@ -20,6 +20,8 @@ def main():
     cell_size = 10
     rows, cols = height // cell_size, width // cell_size
 
+    GRID_MASK = pygame.Rect(0, 0, 220, height)
+    
     # Initialize game and display
     game = GameOfLife(rows, cols)
     display = GameDisplay(width, height, cell_size)
@@ -77,7 +79,17 @@ def main():
 
             for slider in sliders:
                 slider.handle_event(event)
-                slider.handle_grid_event(event, sliders)
+
+            if GRID_MASK.collidepoint(pygame.mouse.get_pos()):
+                if event.type in [pygame.MOUSEBUTTONDOWN, pygame.MOUSEMOTION]:
+                    for slider in sliders:
+                        # Interaction sur les sliders autorisé
+                        if slider.contains_point(event.pos):
+                            break  
+                    else:
+                        # Interaction sur zone 
+                        continue
+                continue
 
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_SPACE:
@@ -85,9 +97,10 @@ def main():
 
             if pygame.mouse.get_pressed()[0]:
                 pos = pygame.mouse.get_pos()
-                for slider in sliders:
-                    if not slider.contains_point(pos):  # Proceed with grid interaction only if not over slider
-                        game.toggle_cell(pos[1] // cell_size, pos[0] // cell_size)
+                if 0 <= pos[0] < width and 0 <= pos[1] < height:  # Ensure within window bounds
+                    for slider in sliders:
+                        if not slider.contains_point(pos):  # Ignore clicks on sliders
+                            game.toggle_cell(pos[1] // cell_size, pos[0] // cell_size)
 
         # sliders initial value
         frequency = sliders[0].get_value()
