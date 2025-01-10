@@ -6,18 +6,24 @@ from graphics import GameDisplay, COLOR_BG
 from interface import Button, Slider
 
 
-SPACESHIP1 = [
+SPACESHIPL = [
     [0, 1, 0],
     [0, 0, 1],
     [1, 1, 1]
 ]
 
-SPACESHIP2 = [
-    [0, 0, 1, 0, 0, 0],
-    [1, 0, 0, 0, 1, 0],
-    [0, 0, 0, 0, 0, 1],
-    [1, 0, 0, 0, 0, 1],
-    [0, 1, 1, 1, 1, 1]
+SPACESHIPM = [
+    [0, 1, 1, 0, 0],
+    [1, 1, 1, 1, 0],
+    [1, 1, 0, 1, 1],
+    [0, 0, 1, 1, 0]
+]
+
+SPACESHIPB = [
+    [0, 0, 0, 1, 1, 0],
+    [1, 1, 1, 0, 1, 1],
+    [1, 1, 1, 1, 1, 0],
+    [0, 1, 1, 1, 0, 0]
 ]
 def main():
     
@@ -45,15 +51,34 @@ def main():
         action=game.reset
     )
 
-    spaceship1_button = Button(
+    spaceshipl_button = Button(
         x=10, y=330, width=160, height=40,
-        text="Spaceship_1",
+        text="Little spaceship",
         font=font,
         color=(50, 50, 200),
         text_color=(255, 255, 255),
-        action=lambda: game.add_spaceship(SPACESHIP1)
+        action=lambda: game.add_spaceship(SPACESHIPL)
     )
-    buttons = [reset_button, spaceship1_button]
+
+    spaceshipm_button = Button(
+        x=10, y=380, width=160, height=40,
+        text="Medium spaceship",
+        font=font,
+        color=(0, 128, 0),
+        text_color=(255, 255, 255),
+        action=lambda: game.add_spaceship(SPACESHIPM)
+    )
+
+    spaceshipb_button = Button(
+        x=10, y=430, width=160, height=40,
+        text="Big spaceship",
+        font=font,
+        color=(255, 128, 0),
+        text_color=(255, 255, 255),
+        action=lambda: game.add_spaceship(SPACESHIPB)
+    )
+
+    buttons = [reset_button, spaceshipl_button, spaceshipm_button, spaceshipb_button]
 
     # Créer les sliders
     sliders = [
