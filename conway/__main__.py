@@ -11,6 +11,14 @@ SPACESHIP1 = [
     [0, 0, 1],
     [1, 1, 1]
 ]
+
+SPACESHIP2 = [
+    [0, 0, 1, 0, 0, 0],
+    [1, 0, 0, 0, 1, 0],
+    [0, 0, 0, 0, 0, 1],
+    [1, 0, 0, 0, 0, 1],
+    [0, 1, 1, 1, 1, 1]
+]
 def main():
     
     pygame.init()
@@ -38,7 +46,7 @@ def main():
     )
 
     spaceship1_button = Button(
-        x=140, y=10, width=160, height=40,
+        x=10, y=330, width=160, height=40,
         text="Spaceship_1",
         font=font,
         color=(50, 50, 200),

@@ -47,7 +47,6 @@ class GameOfLife:
                     self.grid[x, y] = pattern[row][col]
 
     def add_spaceship(self, spaceship):
-        self.reset()
         
         x_offset = self.rows // 2 - len(spaceship) // 2
         y_offset = self.cols // 2 - len(spaceship[0]) // 2
