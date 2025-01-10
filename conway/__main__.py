@@ -22,7 +22,7 @@ def main():
 
     GRID_MASK = pygame.Rect(0, 0, 220, height)
     
-    # Initialize game and display
+    # Initialisation jeu et affichage
     game = GameOfLife(rows, cols)
     display = GameDisplay(width, height, cell_size)
 
@@ -59,9 +59,9 @@ def main():
     # Fond en couleur des sliders + boutons
     bg_zone_x = 0
     bg_zone_y = 0
-    bg_zone_width = 200
+    bg_zone_width = 220
     bg_zone_height = 800
-    bg_zone_color = (255, 255, 255, 0.25)
+    bg_zone_color = (47, 79, 79)
 
     # Variables initiales
     frequency = sliders[0].get_value()
@@ -87,6 +87,7 @@ def main():
             for slider in sliders:
                 slider.handle_event(event)
 
+            # Gestion du mask
             if GRID_MASK.collidepoint(pygame.mouse.get_pos()):
                 if event.type in [pygame.MOUSEBUTTONDOWN, pygame.MOUSEMOTION]:
                     for slider in sliders:
@@ -104,12 +105,14 @@ def main():
 
             if pygame.mouse.get_pressed()[0]:
                 pos = pygame.mouse.get_pos()
-                if 0 <= pos[0] < width and 0 <= pos[1] < height:  # Ensure within window bounds
+                # Evite le spawn des cellules vivantes lorsqu'on sort de la fenêtre
+                if 0 <= pos[0] < width and 0 <= pos[1] < height:
                     for slider in sliders:
-                        if not slider.contains_point(pos):  # Ignore clicks on sliders
+                        # Excepter les clicks sur les sliders
+                        if not slider.contains_point(pos): 
                             game.toggle_cell(pos[1] // cell_size, pos[0] // cell_size)
 
-        # sliders initial value
+        # Valeurs initiales des sliders
         frequency = sliders[0].get_value()
         born_min = sliders[1].get_value()
         born_max = sliders[2].get_value()
