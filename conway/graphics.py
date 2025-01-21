@@ -2,7 +2,7 @@ import pygame
 
 COLOR_BG = (10, 10, 10) # Background color
 COLOR_GRID = (40, 40, 40) # Grid color
-COLOR_DNI = (170, 170, 170) # Dead next iteration color
+COLOR_DNI = (100, 100, 100) # Dead next iteration color
 COLOR_ANI = (255, 255, 255) # Alive next iteration color
 
 class GameDisplay:

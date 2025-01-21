@@ -25,6 +25,18 @@ SPACESHIPB = [
     [1, 1, 1, 1, 1, 0],
     [0, 1, 1, 1, 0, 0]
 ]
+
+FACTORYA = [
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1],
+    [1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 1, 1, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [1, 1, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0, 1, 1, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+]
 def main():
     
     pygame.init()
@@ -53,7 +65,7 @@ def main():
 
     spaceshipl_button = Button(
         x=10, y=330, width=160, height=40,
-        text="Little spaceship",
+        text="Small spaceship",
         font=font,
         color=(50, 50, 200),
         text_color=(255, 255, 255),
@@ -78,7 +90,16 @@ def main():
         action=lambda: game.add_spaceship(SPACESHIPB)
     )
 
-    buttons = [reset_button, spaceshipl_button, spaceshipm_button, spaceshipb_button]
+    factorya_button = Button(
+        x=10, y=480, width=160, height=40,
+        text="Small ship factory",
+        font=font,
+        color=(128, 0, 128),
+        text_color=(255, 255, 255),
+        action=lambda: game.add_spaceship(FACTORYA)
+    )
+
+    buttons = [reset_button, spaceshipl_button, spaceshipm_button, spaceshipb_button, factorya_button]
 
     # Créer les sliders
     sliders = [
@@ -114,6 +135,9 @@ def main():
                 pygame.quit()
                 return
 
+            if event.type == pygame.KEYDOWN and event.key == pygame.K_SPACE:
+                running = not running
+
             for button in buttons:
                 button.handle_event(event)
 
@@ -131,10 +155,6 @@ def main():
                         # Interaction sur zone 
                         continue
                 continue
-
-            if event.type == pygame.KEYDOWN:
-                if event.key == pygame.K_SPACE:
-                    running = not running
 
             if pygame.mouse.get_pressed()[0]:
                 pos = pygame.mouse.get_pos()
