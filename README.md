@@ -1,5 +1,5 @@
 [![Review Assignment Due Date](https://classroom.github.com/assets/deadline-readme-button-22041afd0340ce965d47ae6ef1cefeee28c7c493a6346c4f15d667ab976d596c.svg)](https://classroom.github.com/a/oOQR1xPR)
-# Nom du projet
+# Conway, Jeux de la vie
 
 ## Membres
 
@@ -38,16 +38,34 @@ L'idée est de recréer un jeu de la vie sur Python à partir de rien, avec une 
 
 ## Installation
 
-1) Cloner le projet grâce à cette commande : git clone https://github.com/pythonge2-a/mini-projet-conway-jeux-de-la-vie.git
+1. Cloner le projet grâce à cette commande : 
 
-2) Entrez dans le répertoir grâce à cette commande: cd mini-projet-conway-jeux-de-la-vie/
+   ```bash
+   git clone https://github.com/pythonge2-a/mini-projet-conway-jeux-de-la-vie.git
+   ```
 
-3) Pour entrer dans le programme avec visual code studio, tapez cette ligne de commande : code .
+2. Entrez dans le répertoir grâce à cette commande: 
 
+    ```bash
+    cd mini-projet-conway-jeux-de-la-vie/
+    ```
+
+3. Pour entrer dans le programme avec visual code studio, tapez cette ligne de commande : 
+
+    ```bash
+    code .
+    ```
     Si vous n'avez pas installer Visual Code Studio ou Python, suivez les instructions sur ce lien : https://www.datacamp.com/tutorial/setting-up-vscode-python
 
-4) Il faut ensuite installer poetry grâce à cette commande : poetry install
+4. Il faut ensuite installer poetry grâce à cette commande : 
 
-5) Vous pouvez ensuite lancer le jeux de la vie de Conway grâce à cette commande : poetry run python conawy
+    ```bash
+    poetry install
+    ```
+5. Vous pouvez ensuite lancer le jeux de la vie de Conway grâce à cette commande : 
 
-6) Si vous le souhaitez, vous pouvez changer les règles du jeux, la fréquence et ajouter des composants spéciaux au jeux grâce à l'interface à gauche de la fenêtre.
+
+    ```bash
+    poetry run python conway
+    ```
+6. Si vous le souhaitez, vous pouvez changer les règles du jeux, la fréquence et ajouter des composants spéciaux au jeux grâce à l'interface à gauche de la fenêtre.
