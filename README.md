@@ -29,15 +29,25 @@ L'idée est de recréer un jeu de la vie sur Python à partir de rien, avec une 
 
 ## Cahier des charges
 
-- Un jeux de la vie fonctionnel avec la règle B3S23 
-- Possibilité d'ajouter des cellules vivantes durant le jeu
-- Ajout de tests pour notre code
-- Possibilité d'accélérer, décélerer et arrêter le temps
-- **Si possible** changer les règles avant le lancement du jeu
+- Un jeux de la vie fonctionnel avec la règle B3S23.
+- Possibilité d'ajouter des cellules vivantes durant le jeu.
+- Ajout de tests pour notre code.
+- Possibilité d'accélérer, décélerer et arrêter le temps.
+- **Si possible** changer les règles avant le lancement du jeu.
+- **Si possible** Avoir une grille de taille infinie.
 
 ## Installation
 
-```bash
-poetry install
-...
-```
+1) Cloner le projet grâce à cette commande : git clone https://github.com/pythonge2-a/mini-projet-conway-jeux-de-la-vie.git
+
+2) Entrez dans le répertoir grâce à cette commande: cd mini-projet-conway-jeux-de-la-vie/
+
+3) Pour entrer dans le programme avec visual code studio, tapez cette ligne de commande : code .
+
+    Si vous n'avez pas installer Visual Code Studio ou Python, suivez les instructions sur ce lien : https://www.datacamp.com/tutorial/setting-up-vscode-python
+
+4) Il faut ensuite installer poetry grâce à cette commande : poetry install
+
+5) Vous pouvez ensuite lancer le jeux de la vie de Conway grâce à cette commande : poetry run python conawy
+
+6) Si vous le souhaitez, vous pouvez changer les règles du jeux, la fréquence et ajouter des composants spéciaux au jeux grâce à l'interface à gauche de la fenêtre.
